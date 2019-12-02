@@ -1,1 +1,0 @@
-/Users/kristofivancza/.zshrc
