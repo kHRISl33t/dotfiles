@@ -1,0 +1,4 @@
+keycode 108 = Home NoSymbol Home
+keycode 134 = End NoSymbol End
+keycode 96 = Down NoSymbol Down
+keycode 169 = Up NoSymbol Up
