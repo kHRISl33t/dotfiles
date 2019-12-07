@@ -21,9 +21,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Remap keys using Xmodmap
-xmodmap $HOME/.Xmodmap
-# TEMP SOLUTION TO LOAD XMODMAP WHEN USING EXTERNAL KEYBOARD
+# # Remap keys using Xmodmap
+# xmodmap $HOME/.Xmodmap
+# # TEMP SOLUTION TO LOAD XMODMAP WHEN USING EXTERNAL KEYBOARD
+
+source /home/kristofivancza/.gem/ruby/2.6.0/gems/tmuxinator-1.1.3/completion/tmuxinator.zsh
+
+
+# tmux
+alias tns='tmux new-session -t'
+alias tas='tmux attach-session -t'
+alias tmuxls='tmux ls'
 
 # Source .zshrc
 alias updatezsh='source ~/.zshrc'
@@ -78,3 +86,13 @@ if [ -f '/home/kristofivancza/google-cloud-sdk/path.zsh.inc' ]; then . '/home/kr
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/kristofivancza/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/kristofivancza/google-cloud-sdk/completion.zsh.inc'; fi
+
+# xsel
+
+alias pbcopy="xsel --clipboard --input"
+alias pbpaste="xsel --clipboard --output" 
+
+# ruby
+if which ruby >/dev/null && which gem >/dev/null; then
+    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi

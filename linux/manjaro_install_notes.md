@@ -83,4 +83,14 @@ keycode 134 = End NoSymbol End
 # Make F12 and Eject as Up and Down
 keycode 96 = Down NoSymbol Down
 keycode 169 = Up NoSymbol Up
+
+# tmuxinator
+sudo pacman -S ruby
+gem install tmuxinator
+
+# put this in your .zshrc
+if which ruby >/dev/null && which gem >/dev/null; then
+    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
+
 ```
