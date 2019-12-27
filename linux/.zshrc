@@ -97,5 +97,7 @@ if which ruby >/dev/null && which gem >/dev/null; then
     PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
 
-alias lslinesnode="git ls-files | grep "\(.js\|.ts\)$" | xargs wc -l"
-alias lslinesreact="git ls-files | grep "\(.jsx\|.js\|.css\|.scss\)$" | xargs wc -l"
+alias start-tmsux='docker run -p 8443:8443 --network host --name nginx-tms-ux nginx-tms-ux:v1'
+
+alias lslinesnode='git ls-files | grep "\(.js\|.ts\)$" | xargs wc -l'
+alias lslinesreact='git ls-files | grep "\(.jsx\|.js\|.css\|.scss\)$" | xargs wc -l'
