@@ -96,3 +96,6 @@ alias pbpaste="xsel --clipboard --output"
 if which ruby >/dev/null && which gem >/dev/null; then
     PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
+
+alias lslinesnode="git ls-files | grep "\(.js\|.ts\)$" | xargs wc -l"
+alias lslinesreact="git ls-files | grep "\(.jsx\|.js\|.css\|.scss\)$" | xargs wc -l"

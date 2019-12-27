@@ -93,4 +93,12 @@ if which ruby >/dev/null && which gem >/dev/null; then
     PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
 
+# nginx
+sudo pacman -S nginx
+sudo groupadd nginx
+sudo usermod -aG nginx $USER
+newgrp nginx
+sudo chown -R $USER:$USER /var/log/nginx
+sudo touch /run/nginx.pid
+sudo chown -R $USER:$USER /run/nginx.pid
 ```
