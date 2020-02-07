@@ -27,14 +27,13 @@ export NVM_DIR="$HOME/.nvm"
 
 source /home/kristofivancza/.gem/ruby/2.6.0/gems/tmuxinator-1.1.3/completion/tmuxinator.zsh
 
-
 # tmux
 alias tns='tmux new-session -t'
 alias tas='tmux attach-session -t'
 alias tmuxls='tmux ls'
 
 # Source .zshrc
-alias updatezsh='source ~/.zshrc'
+alias uzsh='source ~/.zshrc'
 
 # docker
 alias dc='docker-compose'
@@ -52,6 +51,10 @@ alias gitpro='git pull --rebase origin'
 alias gitf='git fetch'
 alias gitrm='git rebase master'
 alias gitcb='git branch -b'
+
+alias gitcount='git rev-list --count $(git rev-parse --abbrev-ref HEAD)'
+alias lslinesnode='git ls-files | grep "\(.js\|.ts\)$" | xargs wc -l'
+alias lslinesreact='git ls-files | grep "\(.jsx\|.js\|.css\|.scss\)$" | xargs wc -l'
 
 # kubectl shortcuts
 alias kc='kubectl'
@@ -97,7 +100,7 @@ if which ruby >/dev/null && which gem >/dev/null; then
     PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
 
-alias start-tmsux='docker run -p 8443:8443 --network host --name nginx-tms-ux nginx-tms-ux:v1'
+export PATH=$PATH:/home/kristofivancza/bin
 
-alias lslinesnode='git ls-files | grep "\(.js\|.ts\)$" | xargs wc -l'
-alias lslinesreact='git ls-files | grep "\(.jsx\|.js\|.css\|.scss\)$" | xargs wc -l'
+source '/home/kristofivancza/lib/azure-cli/az.completion'
+source ~/completions/_istioctl
