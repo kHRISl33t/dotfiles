@@ -71,6 +71,9 @@ alias kccp='kubectl cp'
 alias kcks='kubectl -n kube-system'
 alias kcs='kubectl -n staging'
 alias kcp='kubectl -n prod'
+alias kcm='kubectl -n monitoring'
+alias kci='kubectl -n istio-system'
+alias kcdef='kubectl -n default'
 alias kcsgp='kubectl -n staging get pod'
 alias kcsgpw='kubectl -n staging get pod -w'
 alias kceis='kubectl -n staging exec -it'
@@ -78,11 +81,10 @@ alias kcsl='kubectl -n staging logs'
 alias kcsed='kubectl -n staging edit deployment'
 alias kccuc='kubectl config use-context'
 alias kccgc='kubectl config current-context'
-alias kcm='kubectl -n monitoring'
-alias kci='kubectl -n istio-system'
 alias kcgvs='kubectl get virtualservices'
 alias kcggw='kubectl get gateways'
 alias kcgdr='kubectl get destinationrules'
+alias kcsetns="kubectl config set-context --current --namespace"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/kristofivancza/google-cloud-sdk/path.zsh.inc' ]; then . '/home/kristofivancza/google-cloud-sdk/path.zsh.inc'; fi
