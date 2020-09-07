@@ -26,8 +26,6 @@ alias tmuxls='tmux ls'
 
 # Source .zshrc
 alias uzsh='source ~/.zshrc'
-# cd to dev
-alias devdir='cd ~/development'
 
 # docker
 alias dc='docker-compose'
@@ -49,6 +47,7 @@ alias gitcb='git branch -b'
 alias gitcount='git rev-list --count $(git rev-parse --abbrev-ref HEAD)'
 alias lslinesnode='git ls-files | grep "\(.js\|.ts\)$" | xargs wc -l'
 alias lslinesreact='git ls-files | grep "\(.jsx\|.js\|.css\|.scss\)$" | xargs wc -l'
+alias lslinesmono='git ls-files | grep "\(.sh\|.js\|.ts\|.tsx\|.css\|.scss\)$" | xargs wc -l'
 
 # kubectl shortcuts
 alias kc='kubectl'
@@ -80,6 +79,8 @@ alias kcggw='kubectl get gateways'
 alias kcgdr='kubectl get destinationrules'
 alias kcsetns="kubectl config set-context --current --namespace"
 # source /Users/kristofivancza/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+alias rkc="kubectl --kubeconfig=/Users/kristofivancza/.kube/rackforest"
+alias pkc="kubectl --kubeconfig=/Users/kristofivancza/.kube/rackprod"
 
 export NVM_DIR="/Users/kristofivancza/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
