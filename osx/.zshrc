@@ -20,12 +20,23 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # tmux
-alias tns='tmux new-session -t'
-alias tas='tmux attach-session -t'
-alias tmuxls='tmux ls'
+alias tmx='tmux'
+# source .tmux.config
+alias stmx='tmux source-file ~/.tmux.conf'
+# attach to the last used session
+alias tmxa='tmux a'
+# attach to a specific session
+alias tmxas='tmux a -t'
+# create new tmux session with name
+alias tmxns='tmux new -s'
+# list of sessions
+alias tmxls='tmux ls'
+
+# tmuxinator
+alias tmxr='tmuxinator'
 
 # Source .zshrc
-alias uzsh='source ~/.zshrc'
+alias szsh='source ~/.zshrc'
 
 # docker
 alias dc='docker-compose'
