@@ -1,13 +1,15 @@
-export ZSH="/home/kristofivancza/.oh-my-zsh"
+ZSH_DISABLE_COMPFIX="true"
 
-ZSH_THEME="agnoster"
+USER_PATH_LINUX="/home/$USER"
+
+export ZSH="$USER_PATH_LINUX/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
 
 export EDITOR='code -w'
 
 plugins=(
-    archlinux
     git
-    history-substring-search
     colored-man-pages
     zsh-autosuggestions
     zsh-syntax-highlighting
@@ -17,23 +19,26 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# # Remap keys using Xmodmap
-# xmodmap $HOME/.Xmodmap
-# # TEMP SOLUTION TO LOAD XMODMAP WHEN USING EXTERNAL KEYBOARD
-
-source /home/kristofivancza/.gem/ruby/2.6.0/gems/tmuxinator-1.1.3/completion/tmuxinator.zsh
+# User configuration
 
 # tmux
-alias tns='tmux new-session -t'
-alias tas='tmux attach-session -t'
-alias tmuxls='tmux ls'
+alias tmx='tmux'
+# source .tmux.config
+alias stmx='tmux source-file ~/.tmux.conf'
+# attach to the last used session
+alias tmxa='tmux a'
+# attach to a specific session
+alias tmxas='tmux a -t'
+# create new tmux session with name
+alias tmxns='tmux new -s'
+# list of sessions
+alias tmxls='tmux ls'
+
+# tmuxinator
+alias tmxr='tmuxinator'
 
 # Source .zshrc
-alias uzsh='source ~/.zshrc'
+alias szsh='source ~/.zshrc'
 
 # docker
 alias dc='docker-compose'
@@ -55,6 +60,7 @@ alias gitcb='git branch -b'
 alias gitcount='git rev-list --count $(git rev-parse --abbrev-ref HEAD)'
 alias lslinesnode='git ls-files | grep "\(.js\|.ts\)$" | xargs wc -l'
 alias lslinesreact='git ls-files | grep "\(.jsx\|.js\|.css\|.scss\)$" | xargs wc -l'
+alias lslinesmono='git ls-files | grep "\(.sh\|.js\|.ts\|.tsx\|.css\|.scss\)$" | xargs wc -l'
 
 # kubectl shortcuts
 alias kc='kubectl'
@@ -85,24 +91,15 @@ alias kcgvs='kubectl get virtualservices'
 alias kcggw='kubectl get gateways'
 alias kcgdr='kubectl get destinationrules'
 alias kcsetns="kubectl config set-context --current --namespace"
+alias rkc="kubectl --kubeconfig=$USER_PATH_LINUX/.kube/rackforest"
+alias pkc="kubectl --kubeconfig=$USER_PATH_LINUX/.kube/rackprod"
+
+export NVM_DIR="$USER_PATH_LINUX/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+complete -F __start_kubectl kc rkc pkc
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/kristofivancza/google-cloud-sdk/path.zsh.inc' ]; then . '/home/kristofivancza/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$USER_PATH_LINUX/google-cloud-sdk/path.zsh.inc" ]; then . "$USER_PATH_LINUX/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/kristofivancza/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/kristofivancza/google-cloud-sdk/completion.zsh.inc'; fi
-
-# xsel
-
-alias pbcopy="xsel --clipboard --input"
-alias pbpaste="xsel --clipboard --output" 
-
-# ruby
-if which ruby >/dev/null && which gem >/dev/null; then
-    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
-
-export PATH=$PATH:/home/kristofivancza/bin
-
-source '/home/kristofivancza/lib/azure-cli/az.completion'
-source ~/completions/_istioctl
+if [ -f "$USER_PATH_LINUX/google-cloud-sdk/completion.zsh.inc" ]; then . "$USER_PATH_LINUX/google-cloud-sdk/completion.zsh.inc"; fi

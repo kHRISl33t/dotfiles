@@ -76,29 +76,4 @@ options hid_apple swap_opt_cmd=1
 
 # remapping keys, detect events
 yay -S xev
-
-# Make right CMD and ALT as Home and End
-keycode 108 = Home NoSymbol Home
-keycode 134 = End NoSymbol End
-# Make F12 and Eject as Up and Down
-keycode 96 = Down NoSymbol Down
-keycode 169 = Up NoSymbol Up
-
-# tmuxinator
-sudo pacman -S ruby
-gem install tmuxinator
-
-# put this in your .zshrc
-if which ruby >/dev/null && which gem >/dev/null; then
-    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
-
-# nginx
-sudo pacman -S nginx
-sudo groupadd nginx
-sudo usermod -aG nginx $USER
-newgrp nginx
-sudo chown -R $USER:$USER /var/log/nginx
-sudo touch /run/nginx.pid
-sudo chown -R $USER:$USER /run/nginx.pid
 ```

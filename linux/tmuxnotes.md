@@ -1,5 +1,0 @@
-- prefix + w = choose window
-- prefix + arrows = resize window
-- prefix + n = next window
-- prefix + | = open window vertically
-- prefix + - = open window horizontally

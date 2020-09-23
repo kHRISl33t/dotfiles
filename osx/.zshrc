@@ -1,6 +1,8 @@
 ZSH_DISABLE_COMPFIX="true"
 
-export ZSH="/Users/kristofivancza/.oh-my-zsh"
+USER_PATH_OSX="/Users/$USER"
+
+export ZSH="$USER_PATH_OSX/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
@@ -89,16 +91,15 @@ alias kcgvs='kubectl get virtualservices'
 alias kcggw='kubectl get gateways'
 alias kcgdr='kubectl get destinationrules'
 alias kcsetns="kubectl config set-context --current --namespace"
-# source /Users/kristofivancza/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-alias rkc="kubectl --kubeconfig=/Users/kristofivancza/.kube/rackforest"
-alias pkc="kubectl --kubeconfig=/Users/kristofivancza/.kube/rackprod"
+alias rkc="kubectl --kubeconfig=$USER_PATH_OSX/.kube/rackforest"
+alias pkc="kubectl --kubeconfig=$USER_PATH_OSX/.kube/rackprod"
 
-export NVM_DIR="/Users/kristofivancza/.nvm"
+export NVM_DIR="$USER_PATH_OSX/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+complete -F __start_kubectl kc rkc pkc
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/kristofivancza/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kristofivancza/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$USER_PATH_OSX/google-cloud-sdk/path.zsh.inc" ]; then . "$USER_PATH_OSX/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/kristofivancza/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kristofivancza/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-complete -F __start_kubectl kc rkc pkc
+if [ -f "$USER_PATH_OSX/google-cloud-sdk/completion.zsh.inc" ]; then . "$USER_PATH_OSX/google-cloud-sdk/completion.zsh.inc"; fi

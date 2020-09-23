@@ -1,9 +1,15 @@
 # dotfiles
 
+- OSX
+
+```sh
+$ ln -s ~/dotenv/osx/.zshrc ~/.zshrc
+$ ln -s ~/dotenv/osx/.tmux.conf ~/.tmux.conf
+```
+
 - Linux
 
 ```sh
-# create zshrc
-$ ln -s ~/dotenv/linux/.zshrc ~/.zshrc
-$ ln -s ~/dotenv/linux/.tmux.conf ~/.tmux.conf
+$ ln -s ~/dotenv/linux/manjaro/.zshrc ~/.zshrc
+$ ln -s ~/dotenv/linux/manjaro/.tmux.conf ~/.tmux.conf
 ```
