@@ -91,8 +91,6 @@ alias kcgvs='kubectl get virtualservices'
 alias kcggw='kubectl get gateways'
 alias kcgdr='kubectl get destinationrules'
 alias kcsetns="kubectl config set-context --current --namespace"
-alias rkc="kubectl --kubeconfig=$USER_PATH_OSX/.kube/rackforest"
-alias pkc="kubectl --kubeconfig=$USER_PATH_OSX/.kube/rackprod"
 
 export NVM_DIR="$USER_PATH_OSX/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
