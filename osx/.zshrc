@@ -91,13 +91,20 @@ alias kcgvs='kubectl get virtualservices'
 alias kcggw='kubectl get gateways'
 alias kcgdr='kubectl get destinationrules'
 alias kcsetns="kubectl config set-context --current --namespace"
+alias kcgc="kubectl config get-contexts"
+alias kcsc="kubectl config set-context"
 
 export NVM_DIR="$USER_PATH_OSX/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 complete -F __start_kubectl kc rkc pkc
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f "$USER_PATH_OSX/google-cloud-sdk/path.zsh.inc" ]; then . "$USER_PATH_OSX/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "/Users/$USER/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/$USER/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f "$USER_PATH_OSX/google-cloud-sdk/completion.zsh.inc" ]; then . "$USER_PATH_OSX/google-cloud-sdk/completion.zsh.inc"; fi
+if [ -f "/Users/$USER/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/$USER/google-cloud-sdk/completion.zsh.inc"; fi
+
+# brew update && brew install kube-ps1
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+PS1="$PS1$(kube_ps1) "
