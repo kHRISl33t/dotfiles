@@ -72,7 +72,7 @@ alias kcgp='kubectl get pods'
 alias kcgs='kubectl get svc'
 alias kcgn='kubectl get nodes'
 alias kcgss='kubectl get statefulset'
-alias kcgds='kubectl get daemonset'
+alias kcgss='kubectl get daemonset'
 alias kce='kubectl edit'
 alias kcd='kubectl describe'
 alias kcl='kubectl logs'
@@ -108,3 +108,12 @@ if [ -f "/Users/$USER/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/$US
 # kubeon / kubeoff - turn on/off kubecontext/namespace info
 source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 PS1='$(kube_ps1) '$PS1
+
+GOPATH="$USER_PATH_OSX/go"
+PATH="$PATH:$GOPATH/bin"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+alias python=/usr/local/bin/python3.7
+alias pip=/usr/local/bin/pip3
