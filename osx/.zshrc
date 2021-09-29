@@ -106,14 +106,17 @@ if [ -f "/Users/$USER/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/$US
 # https://github.com/jonmosco/kube-ps1
 # https://github.com/ahmetb/kubectx
 # kubeon / kubeoff - turn on/off kubecontext/namespace info
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-PS1='$(kube_ps1) '$PS1
+source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+PROMPT='$(kube_ps1)'$PROMPT
 
 GOPATH="$USER_PATH_OSX/go"
 PATH="$PATH:$GOPATH/bin"
 
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-alias python=/usr/local/bin/python3.7
-alias pip=/usr/local/bin/pip3
+# if command -v pyenv 1>/dev/null 2>&1; then
+#   eval "$(pyenv init -)"
+# fi
+# alias python=/usr/local/bin/python3.7
+# alias pip=/usr/local/bin/pip3
+
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
