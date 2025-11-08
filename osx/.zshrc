@@ -6,6 +6,7 @@ export ZSH="$USER_PATH_OSX/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
+
 export EDITOR='code -w'
 
 plugins=(
