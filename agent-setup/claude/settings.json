@@ -1,0 +1,70 @@
+{
+  "model": "opus",
+  "worktree": {
+    "baseRef": "fresh"
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "vercel@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "linear@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "cloudflare@claude-plugins-official": true,
+    "terraform@claude-plugins-official": true,
+    "mongodb@claude-plugins-official": true,
+    "prisma@claude-plugins-official": true,
+    "auth0@claude-plugins-official": true,
+    "aws-core@claude-plugins-official": true,
+    "databases-on-aws@claude-plugins-official": true,
+    "cloud-sql-postgresql@claude-plugins-official": true,
+    "redis-development@claude-plugins-official": true,
+    "aws-agents@claude-plugins-official": true,
+    "cloud-sql-mysql@claude-plugins-official": true,
+    "aws-transform@claude-plugins-official": true,
+    "notion@claude-plugins-official": true,
+    "mattpocock-skills@claude-plugins-official": true
+  },
+  "theme": "dark",
+  "editorMode": "normal",
+  "preferredNotifChannel": "iterm2",
+  "autoScrollEnabled": false,
+  "inputNeededNotifEnabled": false,
+  "agentPushNotifEnabled": false,
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/tmux-notify.sh\" input",
+            "async": true,
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/tmux-notify.sh\" done",
+            "async": true,
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

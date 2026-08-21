@@ -1,0 +1,199 @@
+# ~/.zshrc
+#
+# Portable zsh config. Nothing machine-specific or private belongs in this file.
+# Those go in ~/.zshrc.local, which is sourced at the very end.
+# See zshrc.local.example.
+
+# oh-my-zsh warns about group-writable completion dirs. Homebrew trips this
+# constantly, so the check is off.
+ZSH_DISABLE_COMPFIX="true"
+
+# agnoster hides the user@host segment when this matches the logged-in user.
+DEFAULT_USER="$USER"
+
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="agnoster"
+
+plugins=(
+    git
+    colored-man-pages
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    node
+    kubectl
+    nodenv
+)
+
+# fpath additions must come before oh-my-zsh, which runs compinit.
+# Adding them afterwards means a second compinit call and a slower shell.
+[[ -d "$HOME/.docker/completions" ]] && fpath=("$HOME/.docker/completions" $fpath)
+
+if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
+  source "$ZSH/oh-my-zsh.sh"
+else
+  # No oh-my-zsh, so nothing has run compinit yet.
+  autoload -Uz compinit && compinit
+  print -u2 "warning: oh-my-zsh is not installed, prompt and plugins are inactive"
+fi
+
+# ---------------------------------------------------------------------------
+# Prompt
+# ---------------------------------------------------------------------------
+
+# Only override the prompt when agnoster actually loaded. prompt_segment is
+# defined by the theme, so its absence means the whole block would error.
+if typeset -f prompt_segment >/dev/null; then
+
+  prompt_node_version() {
+    command -v node >/dev/null 2>&1 || return
+    local node_version
+    node_version=$(node -v 2>/dev/null) || return
+    [[ -n "$node_version" ]] && prompt_segment green black "⬢ ${node_version}"
+  }
+
+  prompt_time() {
+    # %T is HH:MM:SS. Use %H:%M to drop seconds, %r for 12-hour with AM/PM.
+    prompt_segment cyan black "🕐 $(date +%T)"
+  }
+
+  build_prompt() {
+    RETVAL=$?
+    prompt_time
+    prompt_status
+    prompt_virtualenv
+    prompt_aws
+    prompt_context
+    prompt_dir
+    prompt_git
+    prompt_node_version
+    prompt_end
+  }
+
+fi
+
+# ---------------------------------------------------------------------------
+# Editor
+# ---------------------------------------------------------------------------
+
+if command -v code >/dev/null 2>&1; then
+  export EDITOR='code -w'
+  alias c='code'
+else
+  export EDITOR="${EDITOR:-vim}"
+fi
+
+# ---------------------------------------------------------------------------
+# Aliases
+# ---------------------------------------------------------------------------
+
+# tmux
+alias tmx='tmux'
+alias stmx='tmux source-file ~/.tmux.conf'
+alias tmxa='tmux a'
+alias tmxas='tmux a -t'
+alias tmxns='tmux new -s'
+alias tmxls='tmux ls'
+alias tmxr='tmuxinator'
+
+# git
+alias gits='git status'
+alias gitaa='git add .'
+alias gita='git add'
+alias gitc='git commit'
+alias gitcm='git checkout master'
+alias gitprom='git pull --rebase origin master'
+alias gitpro='git pull --rebase origin'
+alias gitf='git fetch'
+alias gitrm='git rebase master'
+alias gitcb='git branch -b'
+
+# docker
+alias dc='docker-compose'
+alias d='docker'
+
+alias sourcezsh='source ~/.zshrc'
+
+# ---------------------------------------------------------------------------
+# Functions
+# ---------------------------------------------------------------------------
+
+# Kill whatever is listening on a port. Usage: killallon 3000
+killallon() {
+  if [[ -z "$1" ]]; then
+    print -u2 "usage: killallon <port>"
+    return 1
+  fi
+
+  lsof -ti:"$1" | xargs kill -SIGINT
+}
+
+# ---------------------------------------------------------------------------
+# Node
+# ---------------------------------------------------------------------------
+
+export NVM_DIR="$HOME/.nvm"
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+
+# Switch node version on cd when the directory has an .nvmrc.
+# Guarded on nvm_find_nvmrc so this is a no-op when nvm is not installed.
+if typeset -f nvm_find_nvmrc >/dev/null; then
+  autoload -U add-zsh-hook
+
+  load-nvmrc() {
+    local nvmrc_path
+    nvmrc_path="$(nvm_find_nvmrc)"
+
+    if [[ -n "$nvmrc_path" ]]; then
+      local nvmrc_node_version
+      nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+      if [[ "$nvmrc_node_version" == "N/A" ]]; then
+        echo "Installing Node version from .nvmrc..."
+        nvm install
+      elif [[ "$nvmrc_node_version" != "$(nvm version)" ]]; then
+        echo "Switching to Node $(cat "${nvmrc_path}")..."
+        nvm use
+      fi
+    elif [[ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ]] && [[ "$(nvm version)" != "$(nvm version default)" ]]; then
+      echo "Reverting to nvm default version"
+      nvm use default
+    fi
+  }
+
+  add-zsh-hook chpwd load-nvmrc
+  load-nvmrc
+fi
+
+# ---------------------------------------------------------------------------
+# PATH
+# ---------------------------------------------------------------------------
+
+export PNPM_HOME="$HOME/Library/pnpm"
+
+# Prepend a directory to PATH only if it exists and is not already there.
+_prepend_path() {
+  [[ -d "$1" ]] || return
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) export PATH="$1:$PATH" ;;
+  esac
+}
+
+_prepend_path "$HOME/.local/bin"
+_prepend_path "$HOME/.docker/bin"
+_prepend_path "$PNPM_HOME/bin"
+
+# ---------------------------------------------------------------------------
+# Optional extras
+# ---------------------------------------------------------------------------
+
+# Written by the Claude Code setup. Absent on machines without it.
+[[ -f "$HOME/.claude/aliases.zsh" ]] && source "$HOME/.claude/aliases.zsh"
+
+# ---------------------------------------------------------------------------
+# Local overrides. Keep last so it can override anything above.
+# Secrets, work config, and per-machine paths live here. Never commit it.
+# ---------------------------------------------------------------------------
+
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

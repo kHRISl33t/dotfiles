@@ -1,0 +1,63 @@
+# ~/.zshrc.local
+#
+# Copy this to ~/.zshrc.local and fill in the values for this machine.
+# Sourced at the end of ~/.zshrc, so anything here overrides the shared config.
+#
+# NEVER commit the real ~/.zshrc.local. It holds credentials.
+# Everything below is a placeholder. Replace or delete.
+
+# ---------------------------------------------------------------------------
+# Secrets
+# ---------------------------------------------------------------------------
+#
+# Plain export works but leaves the value readable in the file and in `env`.
+# Reading it from the macOS keychain keeps it out of any file:
+#
+#   security add-generic-password -a "$USER" -s SERVERLESS_ACCESS_KEY -w
+#   export SERVERLESS_ACCESS_KEY=$(security find-generic-password \
+#     -a "$USER" -s SERVERLESS_ACCESS_KEY -w 2>/dev/null)
+
+# export SERVERLESS_ACCESS_KEY="replace-me"
+# export SOME_OTHER_TOKEN="replace-me"
+
+# ---------------------------------------------------------------------------
+# Cloud / work environment
+# ---------------------------------------------------------------------------
+
+# export AWS_PROFILE=your-profile
+# export AWS_ROLE_ARN=arn:aws:sts::000000000000:assumed-role/YourRole/you@example.com
+# export CDK_DEFAULT_ACCOUNT=000000000000
+# export CDK_DEFAULT_REGION=us-west-2
+
+# ---------------------------------------------------------------------------
+# Machine-specific paths
+# ---------------------------------------------------------------------------
+#
+# Anything pointing at a checkout that only exists on this machine.
+
+# export SOME_TOOL_HOME="$HOME/code/some-repo"
+
+# ---------------------------------------------------------------------------
+# Work helper scripts
+# ---------------------------------------------------------------------------
+#
+# Guard the source so a missing checkout does not break shell startup.
+
+# [[ -f "$HOME/code/some-repo/scripts/helpers.sh" ]] \
+#   && source "$HOME/code/some-repo/scripts/helpers.sh"
+
+# ---------------------------------------------------------------------------
+# Per-machine command wrappers
+# ---------------------------------------------------------------------------
+#
+# Example shape: inject a build arg for docker builds under a given directory.
+# Wrappers that only make sense at one job belong here, not in the shared file.
+#
+# docker() {
+#   if [[ "$1" == "build" && "$PWD" == "$HOME/code/some-repo"* ]]; then
+#     command docker "$@" --build-arg "SOME_ARG=$SOME_VALUE"
+#     return
+#   fi
+#
+#   command docker "$@"
+# }

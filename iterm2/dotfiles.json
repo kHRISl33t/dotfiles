@@ -1,0 +1,18 @@
+{
+  "Profiles": [
+    {
+      "Name": "Dotfiles",
+      "Guid": "3E1098BA-3059-4A89-B340-092A2110B708",
+      "Normal Font": "HackNFM-Bold 12",
+      "Non Ascii Font": "HackNFM-Bold 12",
+      "Use Non-ASCII Font": true,
+      "Transparency": 0.08,
+      "Blur": true,
+      "Blur Radius": 19,
+      "Visual Bell": true,
+      "Terminal Type": "xterm-256color",
+      "Custom Command": "No",
+      "Custom Directory": "No"
+    }
+  ]
+}

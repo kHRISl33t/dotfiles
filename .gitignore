@@ -1,0 +1,19 @@
+# macOS writes these into every directory it displays in Finder.
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# install.sh moves an existing real file aside before linking. Those copies are
+# the pre-install state of this machine, so they never belong in the repo.
+*.backup-*
+
+# Editor and tooling scratch.
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Never commit the real one. zsh/zshrc.local.example is the tracked template.
+.zshrc.local

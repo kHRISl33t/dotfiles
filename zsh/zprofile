@@ -1,0 +1,15 @@
+# ~/.zprofile
+#
+# Runs once per login shell, before ~/.zshrc. Homebrew goes here rather than in
+# .zshrc so PATH is set up once instead of on every new shell.
+
+# Apple Silicon installs Homebrew to /opt/homebrew, Intel to /usr/local.
+# Linuxbrew uses /home/linuxbrew. Take the first one that exists.
+for _brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  if [[ -x "$_brew" ]]; then
+    eval "$("$_brew" shellenv zsh)"
+    break
+  fi
+done
+
+unset _brew
