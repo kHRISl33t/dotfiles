@@ -1,5 +1,31 @@
 {
   "model": "opus",
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/tmux-notify.sh\" input",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/tmux-notify.sh\" done",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ]
+  },
   "worktree": {
     "baseRef": "fresh"
   },
@@ -40,31 +66,5 @@
   "preferredNotifChannel": "iterm2",
   "autoScrollEnabled": false,
   "inputNeededNotifEnabled": false,
-  "agentPushNotifEnabled": false,
-  "hooks": {
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$HOME/.claude/hooks/tmux-notify.sh\" input",
-            "async": true,
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$HOME/.claude/hooks/tmux-notify.sh\" done",
-            "async": true,
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  }
+  "agentPushNotifEnabled": false
 }
